@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: creds
+type: Opaque
+data:
+  MYSQL_ROOT_PASSWORD: amF2aWVyMDA=
+  WORDPRESS_DB_USER: amF2aQ==
+  WORDPRESS_DB_PASSWORD: amF2aWVyc3VhcmV6
