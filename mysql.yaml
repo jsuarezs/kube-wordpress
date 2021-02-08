@@ -15,13 +15,28 @@ spec:
         app: mysql
     spec:
       containers:
-        - image: mysql:8
+        - image: mysql
           name: mysql
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
+                  name: creds
                   key: MYSQL_ROOT_PASSWORD
+            - name: mysql-passwd
+              value: javier00
+            - name: MYSQL_DATABASE
+              value: mysql
+            - name: WORDPRESS_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: creds
+                  key: WORDPRESS_DB_USER
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: creds
+                  key: WORDPRESS_DB_PASSWORD 
           ports:
             - containerPort: 3306
               name: mysql
