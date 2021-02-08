@@ -22,20 +22,26 @@ spec:
           value: mysql
         - name: WORDPRESS_DB_USER
           value: root
-        - name: WORDPRESS_DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: creds
-              key: MYSQL_ROOT_PASSWORD
         - name: WORDPRESS_DB_NAME
           value: wordpress
-        ports:
-          - containerPort: 80
-            name: wordpress
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              key: MYSQL_ROOT_PASSWORD
+              name: creds
         volumeMounts:
-          - name: wordpress-persistent
-            mountPath: /var/www/html
+          - mountPath: /var/www/html
+            name: wordpress-persistent-storage
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 512Mi
       volumes:
-        - name: wordpress-persistent 
-          persistentVolumeClaim:
-            claimName: wp-volume
+      - name: wordpress-persistent-storage
+        persistentVolumeClaim:
+          claimName: wordpress

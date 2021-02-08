@@ -15,23 +15,27 @@ spec:
         app: mysql
     spec:
       containers:
-        - image: mysql:8
-          name: mysql
-          env:
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: creds
-                  key: MYSQL_ROOT_PASSWORD
-            - name: MYSQL_DATABASE
-              value: wordpress
-          ports:
-            - containerPort: 3306
-              name: mysql
-          volumeMounts:
-            - name: mysql-persistent
-              mountPath: /var/lib/mysql
+      - name: mysql
+        image: mysql:8
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              key: MYSQL_ROOT_PASSWORD
+              name: creds
+        volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: mysql-persistent-storage
+        ports:
+        - containerPort: 3306
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 512Mi
       volumes:
-        - name: mysql-persistent
-          persistentVolumeClaim:
-            claimName: mysql-volume
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql

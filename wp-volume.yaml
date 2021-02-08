@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: wp-volume 
+  name: wordpress
 spec:
   accessModes:
     - ReadWriteOnce
