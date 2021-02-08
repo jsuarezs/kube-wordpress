@@ -10,6 +10,7 @@ Deploying Wordpress example in Kubernetes.
 2. Create BBDD secret
 
     PASSWORD=mysecretpassword
+
 NAMESPACE=wordpress
 
     ````kubectl -n $NAMESPACE create secret generic credentials --from-literal=MYSQL_ROOT_PASSWORD=$PASSWORD````
