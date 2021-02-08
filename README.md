@@ -1,4 +1,17 @@
 # kube-wordpress
 Author: Javier Suarez
 
-Errores encontrados: no despliega mysql ni wordpress.yaml. Una primera ejecución creó el contenedor pero no resolvía los secretos, actualmente no consigo ni desplegar.
+Deploying Wordpress example in Kubernetes.
+
+1. Create namespace
+   
+   kubectl create ns wordpress
+
+2. Create BBDD secret
+
+    PASSWORD=mysecretpassword
+NAMESPACE=wordpress
+
+    ````kubectl -n $NAMESPACE create secret generic credentials --from-literal=MYSQL_ROOT_PASSWORD=$PASSWORD````
+
+3. ````kubectl apply -f .````
