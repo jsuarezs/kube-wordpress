@@ -23,20 +23,8 @@ spec:
                 secretKeyRef:
                   name: creds
                   key: MYSQL_ROOT_PASSWORD
-            - name: mysql-passwd
-              value: javier00
             - name: MYSQL_DATABASE
-              value: mysql
-            - name: WORDPRESS_DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: creds
-                  key: WORDPRESS_DB_USER
-            - name: WORDPRESS_DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: creds
-                  key: WORDPRESS_DB_PASSWORD 
+              value: wordpress
           ports:
             - containerPort: 3306
               name: mysql
