@@ -11,7 +11,7 @@ Deploying Wordpress example in Kubernetes.
 
     PASSWORD=mysecretpassword
 
-NAMESPACE=wordpress
+    NAMESPACE=wordpress
 
     ````kubectl -n $NAMESPACE create secret generic credentials --from-literal=MYSQL_ROOT_PASSWORD=$PASSWORD````
 
