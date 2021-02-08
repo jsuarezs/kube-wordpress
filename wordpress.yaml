@@ -16,22 +16,19 @@ spec:
     spec:
       containers:
       - name: wordpress
-        image: wordpress
+        image: wordpress:5.6
         env:
         - name: WORDPRESS_DB_HOST
           value: mysql
         - name: WORDPRESS_DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: creds
-              key: WORDPRESS_DB_USER
+          value: root
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: creds
-              key: WORDPRESS_DB_PASSWORD
+              key: MYSQL_ROOT_PASSWORD
         - name: WORDPRESS_DB_NAME
-          value: mysql
+          value: wordpress
         ports:
           - containerPort: 80
             name: wordpress
@@ -42,4 +39,3 @@ spec:
         - name: wordpress-persistent 
           persistentVolumeClaim:
             claimName: wp-volume
-
